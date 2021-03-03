@@ -3,12 +3,12 @@
 # (например, 5123 **** **** 1212)
 
 
-def task3(cardNumb):
-    if len(cardNumb) != 16:
+def task3(card_numb):
+    if len(card_numb) != 16:
         print('Введен некоректный номер карты')
     else:
-        print(cardNumb[:4], ' **** ' * 2, cardNumb[12:])
+        print(card_numb[:4], ' **** ' * 2, card_numb[12:])
 
 
-cardNumb = input('Введите номер кредитной карты: ')
-task3(cardNumb)
+card_numb = input('Введите номер кредитной карты: ')
+task3(card_numb)

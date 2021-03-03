@@ -1,18 +1,19 @@
-# Напишите собственную версию генератора enumerate под названием extra_enumerate. Примервызова:
-# for i, elem, cum, fracin extra_enumerate(x):
-# print(elem, cum, frac)
+# Напишите  генератор get_frames(),  который производит  «оконную декомпозицию» сигнала: на основе входного
+# списка генерирует наборсписков–перекрывающихсяотдельныхфрагментов  сигнала  размера sizeсо степенью перекрытия overlap.
+# Пример вызова:
+# for framein get_frames(signal, size=1024, overlap=0.5):
+# print(frame)
 
 
-def extra_enumerate(array, start):
-    start_1 = start
-    cum = 0
-    for elem in array:
-        yield start_1, elem
-        start_1 += 1
-        cum = cum + elem
-        print("(", elem, ',', cum, ',', cum * 0.1, ")")
+def get_frames(signal, size, overlap):
+    print('Step: ')
+    step = size * overlap
+    print(step)
+    i = 0
+    while i < len(signal):
+        print(signal[i:i + size])
+        i = i + int(step)
 
 
-x = [1, 3, 4, 2]
-for i in extra_enumerate(x, 0):
-    print()
+signal = [i for i in range(0, 1024)]
+get_frames(signal, size=1024, overlap=0.5)
