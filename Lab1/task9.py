@@ -5,3 +5,23 @@
 # «5*1000 + 3*100 + 1*50 + 2*10»
 
 
+def task9():
+    while True:
+        money = int(input('Введите сумму кратную 50: '))
+        if money % 50 == 0: break
+        else: print('Введите сумму кратную 50')
+    values = {5000:10, 2000:10, 1000:25, 500:25, 200:50, 100:50, 50:50}
+    res = {5000:0, 2000:0, 1000:0, 500:0, 200:0, 100:0, 50:0}
+    for key in values.keys():
+        current = money//key
+        if current > values[key]:
+            money = money - (values[key] * key)
+            res[key] = values[key]
+        else:
+            money = money % key
+            res[key] = current
+    for i in res:
+        if res[i] > 0:
+            print(i, '*', res[i], ' ', end='')
+
+task9()

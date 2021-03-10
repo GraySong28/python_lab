@@ -5,18 +5,20 @@
 # выводит 1 1.1 1.2 1.3 1.4... 4.9
 
 
-def frange(start, end, step):
-    Start = start
-    start = float(start)
-    end = float(end)
-    step = float(step)
-    array = []
-    array.append(start)
-    end = int((end - start) / step)
-    for i in range(Start, end):
-        array.append(array[i - 1] + step)
-    return array
+def frange(start, stop, inc):
+    start -= inc
+    while True:
+        if start > stop and inc < 0:
+            if start + inc <= stop:
+                break
+        else:
+            if start + inc >= stop:
+                break
+        start += inc
+        yield round(start, 2)
 
 
 for i in frange(1, 5, 0.1):
+    print(round(i, 2))
+for i in frange(5, 1, -0.1):
     print(round(i, 2))

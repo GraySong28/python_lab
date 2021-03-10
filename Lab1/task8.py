@@ -6,6 +6,7 @@
 
 
 import random
+import math
 
 
 def task8():
@@ -13,11 +14,9 @@ def task8():
     print('Длинна сгенерированного массива =', numb)
     array = [random.randint(1, 9) for i in range(numb)]
     print('Исходный масив: ', array)
-    i = 0
-    while 2 ** i <= numb:
-        i += 1
-    print('Ближайщая верхняя степень 2, ', '2 ^ ', i, ' = ', 2 ** i, sep='')
-    for i in range(2 ** i - numb):
+    degree = int(math.pow(2, math.ceil(math.log(numb, 2))))
+    print('Ближайщая верхняя степень 2', '=', degree)
+    for i in range(degree - numb):
         array.append(0)
     print('Получившейся массив: ', array)
 

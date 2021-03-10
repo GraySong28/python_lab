@@ -4,13 +4,12 @@ import random
 
 
 def task2(array):
-    false, true = 0, 0
     for i in range(len(array) - 1):
         if array[i] >= array[i + 1]:
-            false += 1
+            print(array)
+            return False
     print(array)
-    if (false > 0): return False
-    else: return True
+    return True
 
 
 array = []

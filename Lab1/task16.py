@@ -4,32 +4,42 @@
 # Используйте модули randomи itertools.
 
 
-import random
-from datetime import datetime, timedelta
+from random import shuffle
+import itertools
+from time import strftime
+import time
+from datetime import timedelta, datetime
 
 
-teams_file = open(r"teams.txt", 'r')
-command_list = [line.strip() for line in teams_file]
-random.shuffle(command_list)
-command_list = [command_list[i:i + 4] for i in range(0, 16, 4)]
-teams_file.close()
+def task16():
+    format = "%d/%m/%Y, %H:%M"
+    start = datetime.strptime("14/09/2021, 22:45", format)
+    teams_file = open(r"teams.txt", 'r')
+    teams = [line.strip() for line in teams_file]
+    teams_file.close()
+    shuffle(teams)
+    teams = [teams[i*4:i*4+4] for i in range(0, 4)]
+    games = []
+    for t in teams:
+        games.append([c for c in itertools.combinations(t, 2)])
+    games_list_file = open(r'games.txt', 'r+')
+    for i in range(0, 6):
+        print(start.strftime(format))
+        games_list_file.writelines(start.strftime(format) + '\n')
+        print("Игра:", i + 1)
+        games_list_file.writelines("Игра:" + str(i + 1) + '\n')
+        print(games[0][i])
+        games_list_file.writelines(str(games[0][i]) + '\n')
+        print(games[1][i])
+        games_list_file.writelines(str(games[1][i]) + '\n')
+        print(games[2][i])
+        games_list_file.writelines(str(games[2][i]) + '\n')
+        print(games[3][i])
+        games_list_file.writelines(str(games[3][i]) + '\n')
+        start = start + timedelta(days=14)
+    print("Окончание чемпионата")
+    print(start.strftime(format))
+    games_list_file.close()
 
-print('\t Список групп:')
-print('Группа 1:', command_list[0], '\n'
-      'Группа 2:', command_list[1], '\n'
-      'Группа 3:', command_list[2], '\n'
-      'Группа 4:', command_list[3])
 
-
-now_date = datetime.now()
-now_date = now_date.replace(2021, 9, 14)
-games_list_file = open(r'games.txt', 'r+')
-start = datetime(2021, 9, 14)
-step = timedelta(days = 14)
-while start <= datetime(2022, 8, 14):
-    start += step
-    games_list_file.write('%s/%s/%s' % (start.day, start.month, start.year) + ', 20:00\n')
-print('\t Список матчей:')
-for line in games_list_file:
-    print(line, end = '')
-games_list_file.close()
+task16()
